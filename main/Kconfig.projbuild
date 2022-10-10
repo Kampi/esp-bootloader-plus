@@ -25,6 +25,11 @@ menu "Bootloader config (Custom)"
         bool "Enable diff compressed ota support."
         default n
 
+    config BOOTLOADER_DIFF_DEBUG_ON
+        bool "Turn on debug log in custom bootloader diff."
+        default n
+        depends on BOOTLOADER_DIFF_ENABLED
+
     choice BOOTLOADER_CUSTOM_DIFF
         prompt "Choose diff method"
         default BOOTLOADER_DIFF_DDELTA
