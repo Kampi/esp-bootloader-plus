@@ -47,9 +47,10 @@
 #include "bootloader_storage_flash.h"
 #include "bootloader_custom_malloc.h" // Note, this header is just used to provide malloc() and free() support.
 
+#include "sdkconfig.h"
+
 #ifdef CONFIG_BOOTLOADER_DIFF_DDELTA
 
-#define CONFIG_DDELTA_DEBUG_ON (1)
 #ifndef MIN
 #define MIN(x, y) (((x) < (y)) ? (x) : (y))
 #endif
@@ -168,8 +169,8 @@ int esp_ddelta_init(int (*read_old)(void *buf, size_t size),
     s_ddelta_handler->read_patch = read_patch;
     s_ddelta_handler->current_stage = ESP_DDELTA_HAVE_NOT_GET_HEADER;
 
-#ifdef CONFIG_DDELTA_DEBUG_ON
-    ESP_LOGI(TAG, "ddelta malloc total size:%d", sizeof(esp_ddelta_handler) + DDELTA_BLOCK_SIZE * 3);
+#ifdef CONFIG_BOOTLOADER_DIFF_DEBUG_ON
+    ESP_LOGI(TAG, "ddelta malloc total size: %d", sizeof(esp_ddelta_handler) + DDELTA_BLOCK_SIZE * 3);
 #endif
     return 0;
 err:
